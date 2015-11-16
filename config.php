@@ -1,7 +1,7 @@
 <?php
 return array (
   'site' => 'http://localhost/wzz',
-  'sharesite' => 'www.96cc.cn',
+  'sharesite' => 'localhost/wzz',
   'ti' => '30',
   'p1' => '',
   'pp' => '',

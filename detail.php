@@ -32,14 +32,24 @@ if($config['fangwen']==1){
 
 if(is_numeric($aid)){
 	$row=$mysql->query("select * from `article` where `id` in({$aid}) limit 1");
+	$row_type=$mysql->query("select name from `typedata` where id=".$row[0]['type']);
 	if($row){
 			$data=$row[0];
-			$顶部广告=$mysql->query("select * from `addata` where `ad_type`='顶部广告' limit 1");//广告
-			$底部广告=$mysql->query("select * from `addata` where `ad_type`='底部广告' limit 1");//广告
-			$统计代码=$mysql->query("select * from `addata` where `ad_type`='统计代码' limit 1");//广告
-			//$微信广告=$mysql->query("select * from `addata` where `ad_type`='微信广告' limit 1");//广告
-			$悬浮广告=$mysql->query("select * from `addata` where `ad_type`='悬浮广告' limit 1");//广告
+			$顶部广告=$mysql->query("select * from `addata` where `ad_type`='顶部广告' and `ad_list`='".$row_type[0]['name']."' limit 1");//广告
+			$底部广告=$mysql->query("select * from `addata` where `ad_type`='底部广告' and `ad_list`='".$row_type[0]['name']."' limit 1");//广告
+			$统计代码=$mysql->query("select * from `addata` where `ad_type`='统计代码' and `ad_list`='".$row_type[0]['name']."' limit 1");//广告
+			//$微信广告=$mysql->query("select * from `addata` where `ad_type`='微信广告' and `ad_list`='".$row_type[0]['name']."' limit 1");//广告
+			$悬浮广告=$mysql->query("select * from `addata` where `ad_type`='悬浮广告' and `ad_list`='".$row_type[0]['name']."' limit 1");//广告
 			//统计
+			// if(!$顶部广告 and !$底部广告 and !$统计代码)
+			// {
+			// 	$顶部广告=$mysql->query("select * from `addata` where `ad_type`='顶部广告' and `ad_list`='全站投放' limit 1");//广告
+			// 	$底部广告=$mysql->query("select * from `addata` where `ad_type`='底部广告' and `ad_list`='全站投放' limit 1");//广告
+			// 	$统计代码=$mysql->query("select * from `addata` where `ad_type`='统计代码' and `ad_list`='全站投放' limit 1");//广告
+			// 	//$微信广告=$mysql->query("select * from `addata` where `ad_type`='微信广告' and `ad_list`='全站投放' limit 1");//广告
+			// 	$悬浮广告=$mysql->query("select * from `addata` where `ad_type`='悬浮广告' and `ad_list`='全站投放' limit 1");//广告
+			// 	//统计
+			// }
 		}else{
 			exit('文章已过期');			
 		}

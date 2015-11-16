@@ -51,6 +51,7 @@ if($_POST){
 			exit;		
 	}
 }
+$adlist_select=$mysql->query("select name from `typedata`");
 ?>
 	<link rel="stylesheet" href="../editor/themes/default/default.css" />
 	<link rel="stylesheet" href="../editor/plugins/code/prettify.css" />
@@ -98,7 +99,9 @@ if($_POST){
                                 </select>
 		<label>投放区域：</label>
                                 <select name="ad_list">
-                                    <option value="0全站投放" selected="">全站投放</option>
+                                    <?php foreach($adlist_select as $k=>$v):?>
+                                    	<option value="<?php echo $v['name'];?>"><?php echo $v['name'];?></option>
+                                	<?php endforeach;?>
                                 </select>		
 	    <label>代码编辑：</label>
         <textarea value="Smith" rows="10" name="ad_content" style="width:700px;height:300px;visibility:hidden;"></textarea>  		
@@ -125,7 +128,9 @@ if($_POST){
                                 </select>
 		<label>投放区域：</label>
                                 <select name="ad_list">
-                                    <option value="0全站投放" selected="">全站投放</option>
+                                    <?php foreach($adlist_select as $k=>$v):?>
+                                    	<option value="<?php echo $v['name'];?>"><?php echo $v['name'];?></option>
+                                	<?php endforeach;?>
                                 </select>		
 	    <label>代码编辑：</label>
         <textarea value="Smith" rows="10" name="ad_content_js" style="width:700px;height:300px"></textarea>  		
