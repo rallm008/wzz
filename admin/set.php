@@ -159,7 +159,16 @@ if($_POST['do']=='kou'){
 		<label>前台会员支持文章发布</label>
 		<input type="text" value="<?php echo $config['UserAddArticle']?>" style="width:300px" name="UserAddArticle">	 <code>0不支持 1支持微信导入</code>
 		<label>前台会员支持发布文章的分类</label>
-		<input type="text" value="<?php echo $config['UserAddArticleType']?>" style="width:300px" name="UserAddArticleType">	 <code>31,搞笑,0.01  表示分类ID是31，分类名称是搞笑，点击单价是0.01</code>				
+		<?php
+			$row=$mysql->query("select id,name,type_pp from typedata");
+		?>
+		<select style="width:315px" name="UserAddArticleType" id="UserAddArticleType">
+			<option value="<?php echo $config['UserAddArticleType']?>"><?php echo $config['UserAddArticleType']?></option>
+			<?php foreach($row as $k=>$v):?>
+				<option value="<?php echo $v['id'].','.$v['name'].','.$v['type_pp'];?>"><?php echo $v['id'].','.$v['name'].','.$v['type_pp'];?></option>
+			<?php endforeach;?>
+		</select>
+		<code>31,搞笑,0.01  表示分类ID是31，分类名称是搞笑，点击单价是0.01</code>
 	 </div>
 	  
 	  <div class="tab-pane fade" id="api">	
